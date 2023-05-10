@@ -1,0 +1,90 @@
+{
+    "episodes": [
+        {
+            "show": "Breaking Bad",
+            "episode_number": "S01E01",
+            "release_date": "January 20, 2008",
+            "poster": "assets/breaking-bad-poster.jpg",
+            "script": "Walter White, a high school chemistry teacher, is diagnosed with lung cancer. He decides to use his knowledge of chemistry to cook and sell methamphetamine with his former student Jesse Pinkman in order to secure his family's financial future."
+        },
+        {
+            "show": "Game of Thrones",
+            "episode_number": "S01E01",
+            "release_date": "April 17, 2011",
+            "poster": "assets/game-of-thrones-poster.jpg",
+            "script": "Lord Eddard Stark is asked to be the chief advisor to the king after the previous one dies. Meanwhile, the exiled Viserys Targaryen hatches a plan to reclaim his father's throne."
+        },
+
+        {
+            "show": "Rick and Morty",
+            "episode_number": "S01E01",
+            "release_date": "December 2, 2013",
+            "poster": "assets/rick-and-morty-poster.jpg",
+            "script": "Rick takes Morty on a trip to another dimension to gather seeds for his latest invention, the \"Mega Trees\". Meanwhile, Jerry and Beth argue over Rick's influence on their son."
+        }
+    ],
+    "shows": [
+        {
+            "name": "Stranger Things",
+            "short_script":"Best Show on NETFLIX!" ,
+            "script": "A love letter to the supernatural classics of the 80s, Stranger Things is the story of a young boy who vanishes into thin air. As friends, family and local police search for answers, they are drawn into an extraordinary mystery involving top-secret government experiments, terrifying supernatural forces and one very strange little girl.",
+            "poster": "assets/stranger-things-poster.jpg",
+            "characters": [
+                {
+                    "name": "Eleven",
+                    "image": "assets/eleven-image.jpg"
+                },
+                {
+                    "name": "Mike Wheeler",
+                    "image": "assets/mike-wheeler-image.jpg"
+                },
+                {
+                    "name": "Jim Hopper",
+                    "image": "assets/jim-hopper-image.jpg"
+                }
+            ]
+        },
+        {
+            "name": "Breaking Bad",
+            "short_script":"Best Show Ever!" ,
+            "script": "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "poster": "assets/breaking-bad-poster.jpg",
+            "characters": [
+                {
+                    "name": "Walter White",
+                    "image": "assets/walter-white-image.jpg"
+                },
+                {
+                    "name": "Jesse Pinkman",
+                    "image": "assets/jesse-pinkman-image.jpg"
+                },
+                {
+                    "name": "Hank Schrader",
+                    "image": "assets/hank-schrader-image.jpg"
+                }
+            ]
+        },
+        {
+            "name": "Game of Thrones",
+            "short_script":"Best Fantasia Show" ,
+            "script": "Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.",
+            "poster": "assets/game-of-thrones-poster.jpg",
+            "characters": [
+                {
+                    "name": "Jon Snow",
+                    "image": "assets/jon-snow-image.jpg"
+                },
+                {
+                    "name": "Daenerys Targaryen",
+                    "image": "assets/daenerys-targaryen-image.jpg"
+                },
+                {
+                    "name": "Tyrion Lannister",
+                    "image": "assets/tyrion-lannister-image.jpg"
+                }
+            ]
+        }
+    ]
+
+
+}
