@@ -1,10 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:getx_series/controller/series_controller.dart';
 import 'package:getx_series/view/pages/episodes.dart';
 import 'package:getx_series/view/pages/shows.dart';
 import 'package:getx_series/view/pages/shows_extend.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../../controller/controller_shows.dart';
 import 'episodes_extend.dart';
 
@@ -14,10 +15,20 @@ class main_page extends StatefulWidget{
 }
 
 class _main_pageState extends State<main_page> {
+  User? _user;
   @override
   void initState(){
     myController.getShows();
+    // SeriesCont.getSeries();
+    _getCurrentUser();
+
     super.initState();
+  }
+  Future<void> _getCurrentUser() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    setState(() {
+      _user = user;
+    });
   }
 
   var btn_style=ElevatedButton.styleFrom(
@@ -33,10 +44,8 @@ class _main_pageState extends State<main_page> {
       ),
 
   );
-
+  // final SeriesController SeriesCont=Get.put(SeriesController());
   final ShowsController myController = Get.put(ShowsController());
-
-  // List info=[];
   @override
   Widget build(BuildContext context) {
 
@@ -57,7 +66,6 @@ class _main_pageState extends State<main_page> {
            ),
          ),
        ),
-       //.fromARGB(100, 0, 100, 136)
        child: Column(
          children: [
            Container(
@@ -84,7 +92,8 @@ class _main_pageState extends State<main_page> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Hussein A. Al-Haj Ali",
+                        // Anonymous User
+                        Text(_user!.email.toString()=="null"?"Anonymous User":_user!.email.toString(),
                           style: TextStyle(
                               color: Colors.black54,
                               fontWeight: FontWeight.w600,
@@ -131,8 +140,7 @@ class _main_pageState extends State<main_page> {
              height: 150,
              child: Obx(
                () => PageView.builder(
-                 reverse: true,
-                   itemCount:myController.shows.length, //info.length,
+                   itemCount:myController.shows.length,
                    itemBuilder: (_,i){
                      return GestureDetector(
                          child: Container(
@@ -155,12 +163,12 @@ class _main_pageState extends State<main_page> {
                                      style: TextStyle(
                                          fontSize: 24,
                                          fontWeight: FontWeight.bold,
-                                       color:   Colors.white //Color.fromARGB(100, 100, 200, 236)
+                                         color:   Colors.white //Color.fromARGB(100, 100, 200, 236)
                                      ),),
                                    Text("${myController.shows[i]['short_script']}",
                                      style: TextStyle(
-                                       fontSize: 16,
-                                       fontWeight: FontWeight.normal,
+                                         fontSize: 16,
+                                         fontWeight: FontWeight.normal,
                                          color: Color.fromARGB(100, 150, 200, 236)
                                      ),),
                                  ],
@@ -193,8 +201,8 @@ class _main_pageState extends State<main_page> {
                            ),
                          ),
                          onTap: (){
-                         final myMap =myController.shows[i]['characters'];
-                         print(myMap);
+                           final myMap =myController.shows[i]['characters'];
+                           print(myMap);
                            Get.to(Shows(),arguments: {
                              "poster":"${myController.shows[i]['poster']}",
                              "name":"${myController.shows[i]['name']}",
