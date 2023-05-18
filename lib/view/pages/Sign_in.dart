@@ -46,7 +46,7 @@ class Sign_in extends StatelessWidget{
             // color: Colors.black87,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: const AssetImage('assets/helloo.jpg'),
+                image: const AssetImage('assets/page2.jpg'),
                 fit: BoxFit.cover,
                 colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.5),

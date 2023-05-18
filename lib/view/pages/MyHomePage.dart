@@ -11,19 +11,29 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       body:Stack(
         children: [
-           Image(
-            image: AssetImage('assets/itache.jpg'),
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-          ),
+          //  Image(
+          //   image: AssetImage('assets/onboard.jpg'),
+          //   fit: BoxFit.cover,
+          //   width: double.infinity,
+          //   height: double.infinity,
+          // ),
           Container(
-            margin: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: const AssetImage('assets/page1.jpg'),
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.5),
+                  BlendMode.darken,
+                ),
+              ),
+            ),
+            padding: EdgeInsets.all(20),
             alignment: Alignment.bottomLeft,
             child: ListView(
-              children:  <Widget>[
+              children:  const <Widget>[
                 SizedBox(
-                  height: 500,
+                  height: 400,
                 ),
 
                 Text(
@@ -39,38 +49,50 @@ class MyHomePage extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
-                      color: Colors.white60
+                      color: Colors.transparent,
+                    // decoration: TextDecoration.border,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(1.0, 5.0),
+                        blurRadius: 2.0,
+                        color: Colors.white,
+
+
+                      ),
+                    ],
+                    decorationColor: Colors.blue,
+                    decorationThickness: 2.0,
                   ),
                 ),
                 SizedBox(height:20 ,),
-                FloatingActionButton.extended(
-                  // shape: OutlineInputBorder(borderRadius: BorderRadius.circular(50),),
-                  backgroundColor: Colors.white12,
-                  shape: const Border.symmetric(horizontal: BorderSide(color: Colors.white)),
-                  onPressed:(){
-                    // Get.toNamed("/main_Page");
-                    Get.toNamed("/Sign_up");
-                  },
-                  // tooltip: 'Increment',
-                  label:   const Text('Sign up',style: TextStyle(
-                      fontSize: 18
-                  )),
-                  // child: const Icon(Icons.add),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Action to perform when the text is tapped
-                    Get.toNamed("/Sign_in");
-                    print('Text tapped!');
-                  },
-                  child: const Text(
-                    'already have account?',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      color: Colors.white,
-                    ),
-                  ),
-                )
+                // FloatingActionButton.extended(
+                //   // shape: OutlineInputBorder(borderRadius: BorderRadius.circular(50),),
+                //   backgroundColor: Colors.white12,
+                //   shape: const Border.symmetric(horizontal: BorderSide(color: Colors.white)),
+                //   onPressed:(){
+                //     // Get.toNamed("/main_Page");
+                //     Get.toNamed("/Sign_up");
+                //   },
+                //   // tooltip: 'Increment',
+                //   label:   const Text('Sign up',style: TextStyle(
+                //       fontSize: 18
+                //   )),
+                //   // child: const Icon(Icons.add),
+                // ),
+                // GestureDetector(
+                //   onTap: () {
+                //     // Action to perform when the text is tapped
+                //     Get.toNamed("/Sign_in");
+                //     print('Text tapped!');
+                //   },
+                //   child: const Text(
+                //     'already have account?',
+                //     style: TextStyle(
+                //       decoration: TextDecoration.underline,
+                //       color: Colors.white,
+                //     ),
+                //   ),
+                // )
               ],
             ),
           ),

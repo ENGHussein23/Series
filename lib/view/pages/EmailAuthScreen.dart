@@ -5,10 +5,14 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../controller/EmailAuthController.dart';
 
 class EmailAuthScreen extends StatelessWidget {
+  var _OutlineInputBorder=OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.white),
+    borderRadius: BorderRadius.circular(8),
+  );
   final EmailAuthController controller = Get.put(EmailAuthController());
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  TextEditingController verifyPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,18 +47,9 @@ class EmailAuthScreen extends StatelessWidget {
                 hintText: 'Enter your email',
                 hintStyle: TextStyle(color: Colors.white),
                 prefixIcon: Icon(Icons.email, color: Colors.white),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                enabledBorder: _OutlineInputBorder,
+                focusedBorder: _OutlineInputBorder,
+                border:_OutlineInputBorder,
               ),
               validator: (value) {
                 if (value!.isEmpty) {
@@ -82,18 +77,9 @@ class EmailAuthScreen extends StatelessWidget {
                 hintText: 'Enter your password',
                 hintStyle: TextStyle(color: Colors.white),
                 prefixIcon: Icon(Icons.lock, color: Colors.white),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                enabledBorder:_OutlineInputBorder,
+                focusedBorder:_OutlineInputBorder,
+                border: _OutlineInputBorder,
               ),
               validator: (value) {
                 if (value!.isEmpty) {
@@ -106,6 +92,36 @@ class EmailAuthScreen extends StatelessWidget {
               },
               onSaved: (value) {
                 // Save password input
+              },
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              controller: verifyPasswordController,
+              obscureText: true,
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                labelText: 'Verify Password',
+                labelStyle: TextStyle(color: Colors.white),
+                hintText: 'Enter your password again',
+                hintStyle: TextStyle(color: Colors.white),
+                prefixIcon: Icon(Icons.lock, color: Colors.white),
+                enabledBorder: _OutlineInputBorder,
+                focusedBorder: _OutlineInputBorder,
+                border: _OutlineInputBorder,
+              ),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Please enter your password again';
+                }
+                if (value != passwordController.text) {
+                  return 'Passwords do not match';
+                }
+                return null;
+              },
+              onSaved: (value) {
+                // Save verified password input
               },
             ),
             SizedBox(
@@ -123,10 +139,39 @@ class EmailAuthScreen extends StatelessWidget {
             if (!controller.isLoading.value)
               ElevatedButton(
                 onPressed: () {
-                  controller.signUpWithEmail(
-                    emailController.text,
-                    passwordController.text,
-                  );
+                  if (emailController.text.isEmpty ||
+                      passwordController.text.isEmpty ||
+                      verifyPasswordController.text.isEmpty) {
+                    Get.snackbar(
+                      'Missing Fields',
+                      'Please fill in all required fields',
+                      duration: Duration(seconds: 3),
+                      backgroundColor: Colors.redAccent,
+                      colorText: Colors.white,
+                      borderRadius: 10,
+                    );
+                    return;
+                  }
+                  else if (passwordController.text !=
+                      verifyPasswordController.text) {
+                    Get.snackbar(
+                      'Passwords do not match',
+                      'Please make sure your passwords match',
+                      duration: Duration(seconds: 3),
+                      backgroundColor: Colors.redAccent,
+                      colorText: Colors.white,
+                      borderRadius: 10,
+                    );
+                    return;
+                  }
+                  else{
+                    controller.signUpWithEmail(
+                      emailController.text,
+                      passwordController.text,
+                    );
+                  }
+
+
                 },
                 child: Text("Sign up with this Email"),
                 style: ElevatedButton.styleFrom(

@@ -13,10 +13,6 @@ class EmailAuthController extends GetxController {
         email: email,//emailController.text,
         password: password,//passwordController.text,
       );
-
-      print("🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽");
-      print("🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽");
-      print('User created: ${userCredential.user!.email}');
       Get.snackbar(
         'Account successfully created',
         'Welcome to our application, you are now logged in with an account ${userCredential.user!.email} ',
@@ -26,8 +22,6 @@ class EmailAuthController extends GetxController {
         borderRadius: 10,
       );
       Get.toNamed("/main_Page");
-      print("🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼");
-      print("🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼🔼");
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         Get.snackbar(
@@ -38,7 +32,6 @@ class EmailAuthController extends GetxController {
           colorText: Colors.white,
           borderRadius: 10,
         );
-        print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
         Get.snackbar(
           'email-already-in-use',
@@ -48,10 +41,17 @@ class EmailAuthController extends GetxController {
           colorText: Colors.white,
           borderRadius: 10,
         );
-        print('The account already exists for that email.');
       }
     } catch (e) {
-      print(e);
+      // Get.snackbar(
+      //   'connection error',
+      //   '$e',
+      //   duration: Duration(seconds: 3),
+      //   backgroundColor: Colors.red,
+      //   colorText: Colors.white,
+      //   borderRadius: 10,
+      // );
+      print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n "+e.toString());
     } finally {
       isLoading.value = false;
     }

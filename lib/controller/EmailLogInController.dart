@@ -43,6 +43,19 @@ class EmailLogInController extends GetxController {
         );
         print('Wrong password provided for that user.');
       }
+      else {
+        Get.snackbar(
+          'connection error',
+          '$e',
+          duration: Duration(seconds: 3),
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          borderRadius: 10,
+        );
+        print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n "+e.toString());
+
+      }
+
     }
     finally {
       isLoading.value = false;

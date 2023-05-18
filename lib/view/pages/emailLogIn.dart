@@ -6,6 +6,10 @@ import '../../controller/EmailAuthController.dart';
 import '../../controller/EmailLogInController.dart';
 
 class EmailLogIn extends StatelessWidget {
+  var _OutlineInputBorder=OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.white),
+    borderRadius: BorderRadius.circular(8),
+  );
   final EmailLogInController controller = Get.put(EmailLogInController());
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -44,18 +48,9 @@ class EmailLogIn extends StatelessWidget {
                 hintText: 'Enter your email',
                 hintStyle: TextStyle(color: Colors.white),
                 prefixIcon: Icon(Icons.email, color: Colors.white),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                enabledBorder: _OutlineInputBorder,
+                focusedBorder: _OutlineInputBorder,
+                border:_OutlineInputBorder ,
               ),
               validator: (value) {
                 if (value!.isEmpty) {
@@ -83,18 +78,9 @@ class EmailLogIn extends StatelessWidget {
                 hintText: 'Enter your password',
                 hintStyle: TextStyle(color: Colors.white),
                 prefixIcon: Icon(Icons.lock, color: Colors.white),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                enabledBorder:_OutlineInputBorder,
+                focusedBorder: _OutlineInputBorder,
+                border: _OutlineInputBorder
               ),
               validator: (value) {
                 if (value!.isEmpty) {

@@ -48,7 +48,7 @@ class _main_pageState extends State<main_page> {
   final ShowsController myController = Get.put(ShowsController());
   @override
   Widget build(BuildContext context) {
-
+    String _user_name=_user!.email.toString()=="null"?"Anonymous User":_user!.email.toString();
     double height=MediaQuery.of(context).size.height;
     double width=MediaQuery.of(context).size.width;
     int _currentIndex=0;
@@ -68,52 +68,64 @@ class _main_pageState extends State<main_page> {
        ),
        child: Column(
          children: [
-           Container(
-             width: width,
-             height: 100,
-             margin: EdgeInsets.only(left: 25,right: 25),
-             decoration: BoxDecoration(
-               borderRadius: BorderRadius.circular(20),
-               color: Colors.white60
-             ),
-             child: Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-               children: [
-                 SizedBox(width: 5,),
-                Row(
-                  children: [ const CircleAvatar(
-                      radius: 40,
-                      backgroundImage: AssetImage(
-                        "assets/me.jpg",
-                      )
-                  ),
-                    SizedBox(width: 10,),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Anonymous User
-                        Text(_user!.email.toString()=="null"?"Anonymous User":_user!.email.toString(),
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18
-                          ),),
-                        SizedBox(height: 4,),
-                        Text("Top Watcher",style: TextStyle(
-                            color: Colors.black38,
-                            fontSize: 15
-                        ),),
-                      ],
-                    ),],
-                ),
+           GestureDetector(
+             child: Container(
+               width: width,
+               height: 100,
+               margin: EdgeInsets.only(left: 25,right: 25),
+               decoration: BoxDecoration(
+                   borderRadius: BorderRadius.circular(20),
+                   color: Colors.white60
+               ),
+               child: Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                 children: [
+                   SizedBox(width: 5,),
+                   Row(
+                     children: [ const CircleAvatar(
+                         radius: 40,
+                         backgroundImage: AssetImage(
+                           "assets/me.jpg",
+                         )
+                     ),
+                       SizedBox(width: 10,),
+                       Column(
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           // Anonymous User
+                           Text(_user!.email.toString()=="null"?"Anonymous User":_user!.email.toString(),
+                             style: TextStyle(
+                                 color: Colors.black54,
+                                 fontWeight: FontWeight.w600,
+                                 fontSize: 18
+                             ),),
+                           SizedBox(height: 4,),
+                           Text("Top Watcher",style: TextStyle(
+                               color: Colors.black38,
+                               fontSize: 15
+                           ),),
+                         ],
+                       ),],
+                   ),
 
-                 ElevatedButton(onPressed: (){}, child: Icon(Icons.notifications),
-                   style: btn_style,
-                 ),
-                 SizedBox(width: 5,),
-               ],
+                   ElevatedButton(onPressed: (){}, child: Icon(Icons.notifications),
+                     style: btn_style,
+                   ),
+                   SizedBox(width: 5,),
+                 ],
+               ),
              ),
+             onTap: (){
+               String user_name=_user!.email.toString()=="null"?"Anonymous User":_user!.email.toString();
+               print(_user_name);
+               Get.toNamed("/Profile",arguments:
+                   {
+                     'username':user_name,
+               }
+               );
+               print("====-------=========---------======--------===");
+             },
            ),
            SizedBox(height: 20,),
            Container(
