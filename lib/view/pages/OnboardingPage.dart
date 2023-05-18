@@ -17,6 +17,7 @@ class OnboardingScreen extends StatelessWidget {
       body: Stack(
         children: [
           PageView(
+            physics: NeverScrollableScrollPhysics(),
             controller: controller.pageController,
             onPageChanged: controller.onPageChanged,
             children: [
@@ -37,42 +38,48 @@ class OnboardingScreen extends StatelessWidget {
                 activeColor: Colors.blueGrey,
               ),),
             )),
+          Obx(() =>Visibility(
+            visible:!(controller.currentPage.value==0),
+            child:Positioned(
+              bottom: 16,
+              left: 16,
+              child: ElevatedButton(
+                child:
+                Image(
+                  image: AssetImage('assets/previous.png'),
+                  fit: BoxFit.cover,
+                  width: 100,
+                  height: 100,
+                ),
+                onPressed: controller.previousPage,
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.transparent,
+                  onPrimary: Colors.transparent, // Change this to the desired text color
+                ),
+              ),
+            ), ), ),
+          Obx(() =>   Visibility(
+            visible:!(controller.currentPage.value==2),
+            child:Positioned(
+              bottom: 16,
+              right: 16,
+              child: ElevatedButton(
+                child: Image(
+                  image: AssetImage('assets/next.png'),
+                  fit: BoxFit.cover,
+                  width: 100,
+                  height: 100,
+                ),
+                onPressed: controller.nextPage,
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.transparent,
+                  onPrimary: Colors.transparent, // Change this to the desired text color
+                ),
+              ),
+            ), ),),
 
-          Positioned(
-            bottom: 16,
-            left: 16,
-            child: ElevatedButton(
-              child:
-               Image(
-                image: AssetImage('assets/previous.png'),
-                fit: BoxFit.cover,
-                width: 100,
-                height: 100,
-              ),
-              onPressed: controller.previousPage,
-              style: ElevatedButton.styleFrom(
-                primary: Colors.transparent,
-                onPrimary: Colors.transparent, // Change this to the desired text color
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 16,
-            right: 16,
-            child: ElevatedButton(
-              child: Image(
-                image: AssetImage('assets/next.png'),
-                fit: BoxFit.cover,
-                width: 100,
-                height: 100,
-              ),
-              onPressed: controller.nextPage,
-              style: ElevatedButton.styleFrom(
-                primary: Colors.transparent,
-                onPrimary: Colors.transparent, // Change this to the desired text color
-              ),
-            ),
-          ),
+
+
         ],
       ),
     );
