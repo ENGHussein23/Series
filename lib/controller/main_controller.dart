@@ -1,16 +1,25 @@
 
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-class ShowsController extends GetxController{
+class MainController extends GetxController{
   var shows_episodes;
   var shows=[].obs;
   var episodes=[].obs;
+  late User CurrentUser;
   @override
   void onInit() {
     super.onInit();
     getShows();
+    _getCurrentUser();
+  }
+  Future<void> _getCurrentUser() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    CurrentUser = user!;
+    update();
   }
   Future<void> getShows() async {
 

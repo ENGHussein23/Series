@@ -1,54 +1,34 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:getx_series/controller/series_controller.dart';
 import 'package:getx_series/view/pages/episodes.dart';
 import 'package:getx_series/view/pages/shows.dart';
 import 'package:getx_series/view/pages/shows_extend.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
-import '../../controller/controller_shows.dart';
+import '../../controller/main_controller.dart';
 import 'episodes_extend.dart';
 
-class main_page extends StatefulWidget{
-  @override
-  State<main_page> createState() => _main_pageState();
-}
-
-class _main_pageState extends State<main_page> {
-  User? _user;
-  @override
-  void initState(){
-    myController.getShows();
-    // SeriesCont.getSeries();
-    _getCurrentUser();
-
-    super.initState();
-  }
-  Future<void> _getCurrentUser() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    setState(() {
-      _user = user;
-    });
-  }
-
+class main_page extends StatelessWidget{
   var btn_style=ElevatedButton.styleFrom(
       // fixedSize: Size.fromHeight(80),
       elevation: 0,
       // backgroundColor: Colors.redAccent,
-      onPrimary: Color.fromARGB(250, 0, 100, 136),
+      onPrimary: const Color.fromARGB(250, 0, 100, 136),
       primary: Colors.transparent,
       // minimumSize: Size(88, 36),
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
 
   );
+
   // final SeriesController SeriesCont=Get.put(SeriesController());
-  final ShowsController myController = Get.put(ShowsController());
+  final MainController myController = Get.put(MainController());
+
   @override
   Widget build(BuildContext context) {
-    String _user_name=_user!.email.toString()=="null"?"Anonymous User":_user!.email.toString();
+    // String _user_name=_user!.email.toString()=="null"?"Anonymous User":_user!.email.toString();
     double height=MediaQuery.of(context).size.height;
     double width=MediaQuery.of(context).size.width;
     int _currentIndex=0;
@@ -72,7 +52,7 @@ class _main_pageState extends State<main_page> {
              child: Container(
                width: width,
                height: 100,
-               margin: EdgeInsets.only(left: 25,right: 25),
+               margin: const EdgeInsets.only(left: 25,right: 25),
                decoration: BoxDecoration(
                    borderRadius: BorderRadius.circular(20),
                    color: Colors.white60
@@ -80,7 +60,7 @@ class _main_pageState extends State<main_page> {
                child: Row(
                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                  children: [
-                   SizedBox(width: 5,),
+                   const SizedBox(width: 5,),
                    Row(
                      children: [ const CircleAvatar(
                          radius: 40,
@@ -88,20 +68,25 @@ class _main_pageState extends State<main_page> {
                            "assets/me.jpg",
                          )
                      ),
-                       SizedBox(width: 10,),
+                       const SizedBox(width: 10,),
                        Column(
                          mainAxisAlignment: MainAxisAlignment.center,
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
                            // Anonymous User
-                           Text(_user!.email.toString()=="null"?"Anonymous User":_user!.email.toString(),
-                             style: TextStyle(
-                                 color: Colors.black54,
-                                 fontWeight: FontWeight.w600,
-                                 fontSize: 18
-                             ),),
-                           SizedBox(height: 4,),
-                           Text("Top Watcher",style: TextStyle(
+                           GetBuilder<MainController>(
+
+                               builder: (controller){
+                             return Text(
+                               controller.CurrentUser.email.toString()=="null"?"Anonymous User":controller.CurrentUser.email.toString(),
+                               style: const TextStyle(
+                                   color: Colors.black54,
+                                   fontWeight: FontWeight.w600,
+                                   fontSize: 18
+                               ),);
+                           }),
+                           const SizedBox(height: 4,),
+                           const Text("Top Watcher",style: TextStyle(
                                color: Colors.black38,
                                fontSize: 15
                            ),),
@@ -109,31 +94,22 @@ class _main_pageState extends State<main_page> {
                        ),],
                    ),
 
-                   ElevatedButton(onPressed: (){}, child: Icon(Icons.notifications),
+                   ElevatedButton(onPressed: (){}, child: const Icon(Icons.notifications),
                      style: btn_style,
                    ),
-                   SizedBox(width: 5,),
+                   const SizedBox(width: 5,),
                  ],
                ),
              ),
-             onTap: (){
-               String user_name=_user!.email.toString()=="null"?"Anonymous User":_user!.email.toString();
-               print(_user_name);
-               Get.toNamed("/Profile",arguments:
-                   {
-                     'username':user_name,
-               }
-               );
-               print("====-------=========---------======--------===");
-             },
+             onTap: (){Get.toNamed("/Profile");},
            ),
-           SizedBox(height: 20,),
+           const SizedBox(height: 20,),
            Container(
-             padding: EdgeInsets.only(left: 25,right: 25),
+             padding: const EdgeInsets.only(left: 25,right: 25),
              child: Row(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                children: [
-                 Text('Popular Shows',
+                 const Text('Popular Shows',
                  style: TextStyle(
                     fontSize: 19,
                    fontWeight: FontWeight.w500,
@@ -141,13 +117,13 @@ class _main_pageState extends State<main_page> {
                  ),),
                  ElevatedButton(onPressed: (){
                    Get.to(Shows_Extend());
-                 }, child: Icon(Icons.arrow_forward_ios_outlined),
-                   style: btn_style,
+                 },
+                   style: btn_style, child: const Icon(Icons.arrow_forward_ios_outlined),
                  ),
                ],
              ),
            ),
-           SizedBox(height: 15,),
+           const SizedBox(height: 15,),
            Container(
              height: 150,
              child: Obx(
@@ -156,13 +132,13 @@ class _main_pageState extends State<main_page> {
                    itemBuilder: (_,i){
                      return GestureDetector(
                          child: Container(
-                           padding: EdgeInsets.only(left: 20,top: 20,right: 20),
+                           padding: const EdgeInsets.only(left: 20,top: 20,right: 20),
                            height: 220,
                            width: MediaQuery.of(context).size.width-40,
-                           margin: EdgeInsets.only(left: 10,right: 3),
+                           margin: const EdgeInsets.only(left: 10,right: 3),
                            decoration: BoxDecoration(
                                borderRadius: BorderRadius.circular(30),
-                               color: i.isEven?Color.fromARGB(100, 83, 109, 254):Color.fromARGB(100, 0, 100, 136)
+                               color: i.isEven?const Color.fromARGB(100, 83, 109, 254):const Color.fromARGB(100, 0, 100, 136)
                            ),
                            child: Column(
                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -172,13 +148,13 @@ class _main_pageState extends State<main_page> {
                                  crossAxisAlignment: CrossAxisAlignment.start,
                                  children: [
                                    Text("${myController.shows[i]['name']}",
-                                     style: TextStyle(
+                                     style: const TextStyle(
                                          fontSize: 24,
                                          fontWeight: FontWeight.bold,
                                          color:   Colors.white //Color.fromARGB(100, 100, 200, 236)
                                      ),),
                                    Text("${myController.shows[i]['short_script']}",
-                                     style: TextStyle(
+                                     style: const TextStyle(
                                          fontSize: 16,
                                          fontWeight: FontWeight.normal,
                                          color: Color.fromARGB(100, 150, 200, 236)
@@ -193,7 +169,7 @@ class _main_pageState extends State<main_page> {
                                          Container(
                                            width: 50,
                                            height: 50,
-                                           padding: EdgeInsets.all(5),
+                                           padding: const EdgeInsets.all(5),
                                            decoration: BoxDecoration(
                                                borderRadius: BorderRadius.circular(20),
                                                image: DecorationImage(
@@ -206,7 +182,7 @@ class _main_pageState extends State<main_page> {
                                          )
                                      ],
                                    ),
-                                   SizedBox(height: 10,)
+                                   const SizedBox(height: 10,)
                                  ],
                                ),
                              ],
@@ -224,33 +200,29 @@ class _main_pageState extends State<main_page> {
                            });
                          }
                      );
-
                    }),
              )
            ),
-           SizedBox(height: 20,),
+           const SizedBox(height: 20,),
            Container(
-             padding: EdgeInsets.only(left: 25,right: 25),
+             padding: const EdgeInsets.only(left: 25,right: 25),
              child: Row(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                children: [
-                 Text('Best Episodes',
+                 const Text('Best Episodes',
                    style: TextStyle(
                        fontSize: 19,
                        fontWeight: FontWeight.w500,
                        color: Color.fromARGB(250, 0, 100, 136),
                    ),),
                  ElevatedButton(onPressed: (){
-                   Get.to(Episodes_Extend());
-                 },
-
-                   child: Icon(Icons.arrow_forward_ios_outlined),
-                   style: btn_style,
-                 ),
+                   Get.to(Episodes_Extend());},
+                   child: const Icon(Icons.arrow_forward_ios_outlined),
+                   style: btn_style,),
                ],
              ),
            ),
-           SizedBox(height: 10,),
+           const SizedBox(height: 10,),
            Expanded(child:
            Obx(() => ListView.builder(
                itemCount: myController.episodes.length,
@@ -259,15 +231,15 @@ class _main_pageState extends State<main_page> {
                    child: Container(
                      width: width,
                      height: 100,
-                     margin: EdgeInsets.only(left: 25,right: 25,bottom: 10),
+                     margin: const EdgeInsets.only(left: 25,right: 25,bottom: 10),
                      decoration: BoxDecoration(
                          borderRadius: BorderRadius.circular(20),
-                         color: Color.fromARGB(100, 0, 100, 136),
+                         color: const Color.fromARGB(100, 0, 100, 136),
                      ),
                      child: Row(
                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                        children: [
-                         SizedBox(width: 0,),
+                         const SizedBox(width: 0,),
                          Row(
                            children: [ Container(
                              decoration: BoxDecoration(
@@ -281,19 +253,19 @@ class _main_pageState extends State<main_page> {
                                width: 80,
                              ),
                            ),
-                             SizedBox(width: 10,),
+                             const SizedBox(width: 10,),
                              Column(
                                mainAxisAlignment: MainAxisAlignment.center,
                                crossAxisAlignment: CrossAxisAlignment.start,
                                children: [
                                  Text("${myController.episodes.value[i]["show"]}",
-                                   style: TextStyle(
+                                   style: const TextStyle(
                                        color: Colors.white,
                                        fontWeight: FontWeight.w600,
                                        fontSize: 18
                                    ),),
-                                 SizedBox(height: 4,),
-                                 Text("${myController.episodes.value[i]["episode_number"]}",style: TextStyle(
+                                 const SizedBox(height: 4,),
+                                 Text("${myController.episodes.value[i]["episode_number"]}",style: const TextStyle(
                                      color: Colors.white30,
                                      fontSize: 18
                                  ),),
@@ -304,15 +276,15 @@ class _main_pageState extends State<main_page> {
                          Column(
                            crossAxisAlignment: CrossAxisAlignment.end,
                            children: [
-                             SizedBox(height: 25,),
+                             const SizedBox(height: 25,),
                              Text("${myController.episodes.value[i]["release_date"]}",
-                               style: TextStyle(
+                               style: const TextStyle(
                                    color: Colors.white30,
                                    fontSize: 13
                                ),),
                            ],
                          ),
-                         SizedBox(width: 5,),
+                         const SizedBox(width: 5,),
                        ],
                      ),
                    ),
@@ -334,3 +306,21 @@ class _main_pageState extends State<main_page> {
    );
   }
 }
+
+/*
+ User? _user;
+  @override
+  void initState(){
+    myController.getShows();
+    // SeriesCont.getSeries();
+    _getCurrentUser();
+
+    super.initState();
+  }
+  Future<void> _getCurrentUser() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    setState(() {
+      _user = user;
+    });
+  }
+ */

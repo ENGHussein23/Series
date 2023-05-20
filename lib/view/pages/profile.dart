@@ -1,14 +1,16 @@
-import 'package:flutter/cupertino.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+// import 'package:get/get_core/src/get_main.dart';
 
 import '../../controller/ProfileController.dart';
 class Profile extends StatelessWidget {
   final ProfileController controller = Get.put(ProfileController());
   TextEditingController NameController = TextEditingController();
-  var _OutlineInputBorder=OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.white),
+  final _OutlineInputBorder=OutlineInputBorder(
+    borderSide: const BorderSide(color: Colors.white),
     borderRadius: BorderRadius.circular(8),
   );
   @override
@@ -23,7 +25,7 @@ class Profile extends StatelessWidget {
           SliverAppBar(
             expandedHeight: 200.0,
             flexibleSpace: Obx(() => AnimatedContainer(
-              duration: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 500),
               // height:  controller.isExpanded.value ?0:100,
               color: controller.isExpanded.value ? Colors.transparent : Colors.black,
               child: FlexibleSpaceBar(
@@ -40,7 +42,7 @@ class Profile extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               height: Get.height - kToolbarHeight - controller.flexibleSpaceMaxHeight.value,
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -55,17 +57,17 @@ class Profile extends StatelessWidget {
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  SizedBox(height: 20,),
-                  Text("my personal info:",style: TextStyle(color: Colors.white,fontSize: 20),),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 20,),
+                  const Text("my personal info:",style: TextStyle(color: Colors.white,fontSize: 20),),
+                  const SizedBox(height: 10,),
                   // name
                   TextFormField(
                     controller: NameController,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      label: Text("my name"),
-                      labelStyle: TextStyle(color: Colors.white),
-                      hintStyle: TextStyle(color: Colors.white),
+                      label: const Text("my name"),
+                      labelStyle: const TextStyle(color: Colors.white),
+                      hintStyle: const TextStyle(color: Colors.white),
                       enabledBorder:_OutlineInputBorder,
                       focusedBorder:_OutlineInputBorder,
                       border: _OutlineInputBorder,
@@ -92,7 +94,7 @@ class Profile extends StatelessWidget {
                     Get.dialog(
                       AlertDialog(
                         backgroundColor: Colors.black87,
-                        title: Text('New Password',style: TextStyle(color: Colors.white),),
+                        title: const Text('New Password',style: TextStyle(color: Colors.white),),
                         content:  Container(
                           // color: Colors.blueGrey,
                           height: 140,
@@ -100,22 +102,22 @@ class Profile extends StatelessWidget {
                               children: [
                                 TextFormField(
                                   controller: NameController,
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                   decoration: InputDecoration(
-                                    labelStyle: TextStyle(color: Colors.white),
-                                    hintStyle: TextStyle(color: Colors.white),
+                                    labelStyle: const TextStyle(color: Colors.white),
+                                    hintStyle: const TextStyle(color: Colors.white),
                                     enabledBorder:_OutlineInputBorder,
                                     focusedBorder:_OutlineInputBorder,
                                     border: _OutlineInputBorder,
                                   ),
                                 ),
-                                SizedBox(height: 10,),
+                                const SizedBox(height: 10,),
                                 TextFormField(
                                   controller: NameController,
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                   decoration: InputDecoration(
-                                    labelStyle: TextStyle(color: Colors.white),
-                                    hintStyle: TextStyle(color: Colors.white),
+                                    labelStyle: const TextStyle(color: Colors.white),
+                                    hintStyle: const TextStyle(color: Colors.white),
                                     enabledBorder:_OutlineInputBorder,
                                     focusedBorder:_OutlineInputBorder,
                                     border: _OutlineInputBorder,
@@ -127,13 +129,13 @@ class Profile extends StatelessWidget {
                         ),
                         actions: [
                           TextButton(
-                            child: Text('Cancel'),
+                            child: const Text('Cancel'),
                             onPressed: () {
                               Get.back();
                             },
                           ),
                           TextButton(
-                            child: Text('Save'),
+                            child: const Text('Save'),
                             onPressed: () {
                               Get.back();
                             },
@@ -141,22 +143,22 @@ class Profile extends StatelessWidget {
                         ],
                       ),
                     );
-                  }, child: Text("update my password"),),
+                  }, child: const Text("update my password"),),
                   const Divider(height: 10, thickness: 1, endIndent: 20, indent: 20, color: Colors.white60,),
                   ElevatedButton(onPressed: (){
                     Get.dialog(
                       AlertDialog(
-                        title: Text('Update profile photo'),
-                        content: Text('Dialog Content'),
+                        title: const Text('Update profile photo'),
+                        content: const Text('Dialog Content'),
                         actions: [
                           TextButton(
-                            child: Text('Cancel'),
+                            child: const Text('Cancel'),
                             onPressed: () {
                               Get.back();
                             },
                           ),
                           TextButton(
-                            child: Text('Save'),
+                            child: const Text('Save'),
                             onPressed: () {
                               Get.back();
                             },
@@ -164,12 +166,45 @@ class Profile extends StatelessWidget {
                         ],
                       ),
                     );
-                  }, child: Text("update my profile photo"),),
+                  }, child: const Text("update my profile photo"),),
                   const Divider(height: 10, thickness: 2, endIndent: 20, indent: 20, color: Colors.white60,),
-                  SizedBox(height: 20,),
-                  ElevatedButton(onPressed: (){}, child: Text("Save"),),
-                  SizedBox(height: 20,),
-                  ElevatedButton(onPressed: (){}, child: Text("Log out!"),),
+                  const SizedBox(height: 20,),
+                  ElevatedButton(onPressed: (){}, child: const Text("Save"),),
+                  const SizedBox(height: 20,),
+
+                  // logout button
+                  ElevatedButton(
+                    onPressed: (){
+
+                    AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.question,
+                        dialogBackgroundColor: Colors.black87,
+                        animType: AnimType.bottomSlide,
+                        title: 'Log out?',
+                        titleTextStyle: const TextStyle(color: Colors.white),
+                        desc: 'Do you want to log out?',
+                        descTextStyle: const TextStyle(color: Colors.white),
+                        btnCancelOnPress: () {},
+                    btnOkOnPress: () async{
+                    await FirebaseAuth.instance.signOut();
+                    Get.snackbar(
+                      'logout successfully', '',
+                      duration: const Duration(seconds: 2),
+                      backgroundColor: const Color.fromARGB(100, 0, 200, 200),
+                      colorText: Colors.white,
+                      borderRadius: 10,);
+                    Get.offAllNamed('/');
+                    }
+                    ,
+                    btnOkText: 'yes logout',
+                    ).show();},
+                    child:  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,children: const [
+                      Icon(Icons.logout),
+                      Text("Log out"),
+                    ],),),
+                  const SizedBox(height: 500,)
                 ],
               ),
             ),

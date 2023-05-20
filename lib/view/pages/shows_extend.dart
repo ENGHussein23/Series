@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:getx_series/view/pages/shows.dart';
 import 'package:get/get.dart';
 
-import '../../controller/controller_shows.dart';
+import '../../controller/main_controller.dart';
 
 class Shows_Extend extends StatelessWidget{
-  final ShowsController myController = Get.put(ShowsController());
+  final MainController myController = Get.put(MainController());
 
   @override
   Widget build(BuildContext context) {

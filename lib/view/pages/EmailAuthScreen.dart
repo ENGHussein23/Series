@@ -5,7 +5,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../controller/EmailAuthController.dart';
 
 class EmailAuthScreen extends StatelessWidget {
-  var _OutlineInputBorder=OutlineInputBorder(
+  final _OutlineInputBorder=OutlineInputBorder(
     borderSide: BorderSide(color: Colors.white),
     borderRadius: BorderRadius.circular(8),
   );

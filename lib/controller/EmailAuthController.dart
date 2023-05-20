@@ -21,7 +21,7 @@ class EmailAuthController extends GetxController {
         colorText: Colors.white,
         borderRadius: 10,
       );
-      Get.toNamed("/main_Page");
+      Get.toNamed("/Register_Info");
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         Get.snackbar(
@@ -43,14 +43,14 @@ class EmailAuthController extends GetxController {
         );
       }
     } catch (e) {
-      // Get.snackbar(
-      //   'connection error',
-      //   '$e',
-      //   duration: Duration(seconds: 3),
-      //   backgroundColor: Colors.red,
-      //   colorText: Colors.white,
-      //   borderRadius: 10,
-      // );
+      Get.snackbar(
+        'connection error',
+        '$e',
+        duration: Duration(seconds: 3),
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        borderRadius: 10,
+      );
       print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n "+e.toString());
     } finally {
       isLoading.value = false;
