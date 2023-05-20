@@ -16,8 +16,8 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final Map<String, dynamic> arguments = Get.parameters;
-    var userName=arguments['username'];
+    // final Map<String, dynamic> arguments = Get.parameters;
+    // var userName=arguments['username'];
     return Scaffold(
       body: CustomScrollView(
         controller: controller.scrollController,
@@ -30,7 +30,12 @@ class Profile extends StatelessWidget {
               color: controller.isExpanded.value ? Colors.transparent : Colors.black,
               child: FlexibleSpaceBar(
                  centerTitle: true,
-                title: Text(userName.toString()),
+                title:Text(controller.DataDoc.data()?['name']=="null"?"Anonymous User":controller.DataDoc.data()?['name']),
+                // GetBuilder<ProfileController>(
+                //   builder: (controller){
+                //     return ;
+                //   }
+                // ),
                 background: Image.asset(
                   'assets/batsign.jpg',
                   fit: BoxFit.cover,
@@ -54,7 +59,9 @@ class Profile extends StatelessWidget {
                   ),
                 ),
               ),
-              child: ListView(
+              child:
+
+              ListView(
                 shrinkWrap: true,
                 children: [
                   const SizedBox(height: 20,),
