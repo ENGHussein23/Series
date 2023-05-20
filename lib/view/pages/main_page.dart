@@ -69,29 +69,32 @@ class main_page extends StatelessWidget{
                          )
                      ),
                        const SizedBox(width: 10,),
-                       Column(
-                         mainAxisAlignment: MainAxisAlignment.center,
-                         crossAxisAlignment: CrossAxisAlignment.start,
-                         children: [
-                           // Anonymous User
-                           GetBuilder<MainController>(
 
+                           GetBuilder<MainController>(
                                builder: (controller){
-                             return Text(
-                               controller.CurrentUser.email.toString()=="null"?"Anonymous User":controller.CurrentUser.email.toString(),
-                               style: const TextStyle(
-                                   color: Colors.black54,
-                                   fontWeight: FontWeight.w600,
-                                   fontSize: 18
-                               ),);
+                             return Column(
+                                 mainAxisAlignment: MainAxisAlignment.center,
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 children: [
+                                   Text(
+                                     // controller.DataDoc.data()?['name'],
+                                     controller.DataDoc.data()?['name']=="null"?"Anonymous User":controller.DataDoc.data()?['name'],
+                                     style: const TextStyle(
+                                         color: Colors.black54,
+                                         fontWeight: FontWeight.w600,
+                                         fontSize: 18
+                                     ),),
+                                   const SizedBox(height: 4,),
+                                    Text(
+                                 controller.DataDoc.data()?['email']=="null"?"Anonymous Email":controller.DataDoc.data()?['email'],
+                                     style: const TextStyle(
+                                       color: Colors.black38,
+                                       fontSize: 15
+                                   ),),
+                                 ])
+                               ;
                            }),
-                           const SizedBox(height: 4,),
-                           const Text("Top Watcher",style: TextStyle(
-                               color: Colors.black38,
-                               fontSize: 15
-                           ),),
-                         ],
-                       ),],
+                     ],
                    ),
 
                    ElevatedButton(onPressed: (){}, child: const Icon(Icons.notifications),
